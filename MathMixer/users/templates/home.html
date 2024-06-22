@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Главная страница</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card-img-top {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-top: -50px;
+      background: #fff;
+      padding: 5px;
+      border: 2px solid #eee;
+    }
+
+    .card-body {
+      padding-top: 30px;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .card-text {
+      font-size: 1rem;
+      color: #777;
+    }
+
+    .position-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #530096;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .top10 .col-md-6 {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar fixed-top navbar-expand-md navbar-light container-fluid" style="padding: 13px 10%; box-shadow: 0 0 50px rgba(162, 3, 202, 0.5); background-color: rgb(56, 0, 94)">
+    <a class="navbar-brand py-0 mr-auto text-light" href="#home">MathMixer</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background: rgb(209, 202, 202);">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="nav">
+      <ul class="nav navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link text-light text-decoration-underline" href="#home">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#about">О нас</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#photography">Наша команда</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#contact">Контакты</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#top_users">Топ-10</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'users:trainers_redirect' %}">Тренажеры</a>
+        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'users:profile' %}">Мой профиль</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'users:login' %}">Войти</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid" style="background-color: #530096; padding: 0 10%;">
+    <div class="col main" style="background-color: rgba(255, 255, 255, 0.767); box-shadow: 0 0 1000px rgba(212, 82, 82, 0.5);">
+      <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" style="background-image: url({% static 'image/bg.jpg' %});">
+            <div class="bigtext text-center">
+              <h1>Математический генератор MathMixer</h1>
+              <h4>Инструмент для генерации математических задач.</h4>
+              <button class="btn btn-lg btn-primary mt-3" style="background-image: linear-gradient(#9c12b8,#2e013b); border:none">Начать тренироваться</button>
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({% static 'image/bg-1.jpg' %});">
+            <div class="bigtext text-center">
+              <h1>Математический генератор MathMixer</h1>
+              <h4>Инструмент для генерации математических задач.</h4>
+              <button class="btn btn-lg btn-primary mt-3" style="background-image: linear-gradient(#9c12b8,#2e013b); border:none">Начать тренироваться</button>
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({% static 'image/bg-2.jpg' %});">
+            <div class="bigtext text-center">
+              <h1>Математический генератор MathMixer</h1>
+              <h4>Инструмент для генерации математических задач.</h4>
+              <button class="btn btn-lg btn-primary mt-3" style="background-image: linear-gradient(#9c12b8,#2e013b); border:none">Начать тренироваться</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row section top10 text-center" style="margin-top: 50px;" id="top_users">
+        <div class="col-12">
+          <h2 class="mb-4" style="font-size: 40px;">Топ-10 пользователей</h2>
+          <div class="row justify-content-center" style="margin-top: 100px;">
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">1</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Alice">
+                <div class="card-body">
+                  <h5 class="card-title">Alice</h5>
+                  <p class="card-text">1500 очков</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">2</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Bob">
+                <div class="card-body">
+                  <h5 class="card-title">Bob</h5>
+                  <p class="card-text">1400 очков</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">3</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Charlie">
+                <div class="card-body">
+                  <h5 class="card-title">Charlie</h5>
+                  <p class="card-text">1350 очков</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">4</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="David">
+                <div class="card-body">
+                  <h5 class="card-title">David</h5>
+                  <p class="card-text">1300 очков</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">5</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Eve">
+                <div class="card-body">
+                  <h5 class="card-title">Eve</h5>
+                  <p class="card-text">1250 очков</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">6</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Frank">
+                <div class="card-body">
+                  <h5 class="card-title">Frank</h5>
+                  <p class="card-text">1200 очков</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">7</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Grace">
+                <div class="card-body">
+                  <h5 class="card-title">Grace</h5>
+                  <p class="card-text">1150 очков</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">8</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Heidi">
+                <div class="card-body">
+                  <h5 class="card-title">Heidi</h5>
+                  <p class="card-text">1100 очков</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">9</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Ivan">
+                <div class="card-body">
+                  <h5 class="card-title">Ivan</h5>
+                  <p class="card-text">1050 очков</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number">10</div>
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Judy">
+                <div class="card-body">
+                  <h5 class="card-title">Judy</h5>
+                  <p class="card-text">1000 очков</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-2 mb-4">
+              <div class="card h-100">
+                <div class="position-number" style="background-color: #ffa500; color: #fff;">11</div>
+                <div class="card-body">
+                  <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">{{ user.username }}</h5>
+                  <p class="card-text" style="font-size: 1.2rem;">Ваши очки</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row section d-flex align-items-center" id="about">
+        <div class="col-xxl-6">
+          <img src="{% static 'image/about.png' %}"  class="img-fluid" style="border-radius: 50px;">
+        </div>
+        <div class="col-xxl-6">
+          <h2 class="mb-5 text-center" style="font-size: 40px;">О нас</h2>
+          <span class="align-middle">
+            <h4>Кто мы такие?</h4>
+            <p style="font-size: 25px; text-align: justify;">
+              Мы — команда энтузиастов в области информационных технологий, объединившихся для создания MathFlow — инновационного генератора математических примеров, способного удовлетворить потребности пользователей любого уровня подготовки.
+            </p>
+            <h4>Наша миссия</h4>
+            <p style="font-size: 25px; text-align: justify;">
+              Мы стремимся упростить процесс изучения математики и сделать его доступным для всех. Наша миссия — предоставить инструмент, который поможет студентам, преподавателям, школьникам и всем, кто интересуется математикой, эффективно решать и практиковаться в математических задачах различных уровней сложности.
+            </p>
+          </span>
+        </div>
+      </div>
+
+      <div class="row section" id="photography">
+        <div class="column-fluid">
+          <h2 class="text-center" style="font-size: 40px;">Наша команда</h2>
+          <p class="text-center" style="font-size: 25px;">
+            Познакомьтесь с нашей командой профессионалов, которые работают над проектом.
+          </p>
+
+          <div class="row d-flex align-items-center flex-column-reverse">
+            <p class="col-10" style="font-size: 25px; text-align: justify;">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et possimus consequuntur commodi quibusdam, excepturi, itaque iure ex laborum impedit recusandae aliquid praesentium? Fugit est aliquam labore mollitia facere molestiae laborum assumenda quos perspiciatis quaerat ipsum saepe accusamus reiciendis, rerum dolorem, veritatis commodi doloribus quo nulla voluptatum. Iste porro natus deserunt necessitatibus eligendi alias sint odit corrupti distinctio debitis consectetur facere, illo quidem veniam repellendus fuga rerum. Est optio labore nobis debitis, esse autem aliquid eligendi assumenda. Tenetur cumque cum numquam, atque fugit, nulla quod sed laudantium accusantium voluptatibus placeat odit eaque distinctio fuga illum consequatur beatae. Porro adipisci saepe hic.
+            </p>
+            <section class="home col-10 col-xxl-5 mb-3">
+              <div id="carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-controls">
+                  <ol class="carousel-indicators">
+                    <li data-bs-target="#carousel" data-bs-slide-to="0" class="active" style="background-image: url({% static 'image/command_slide-1.jpg' %});"></li>
+                    <li data-bs-target="#carousel" data-bs-slide-to="1" style="background-image: url({% static 'image/command_slide-2.jpg' %});"></li>
+                    <li data-bs-target="#carousel" data-bs-slide-to="2" style="background-image: url({% static 'image/command_slide-3.jpg' %});"></li>
+                    <li data-bs-target="#carousel" data-bs-slide-to="3" style="background-image: url({% static 'image/command_slide-4.jpg' %});"></li>
+                  </ol>
+                </div>
+                <div class="carousel-inner" style="border-radius: 50px;">
+                  <div class="carousel-item active" style="background-image: url({% static 'image/command_slide-1.jpg' %});">
+                    <div class="container">
+                      <h2>Разуваев Леонид</h2>
+                      <p>Front-End Developer</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item" style="background-image: url({% static 'image/command_slide-2.jpg' %});">
+                    <div class="container">
+                      <h2>Раскин Роман</h2>
+                      <p>Front-End Developer</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item" style="background-image: url({% static 'image/command_slide-3.jpg' %});">
+                    <div class="container">
+                      <h2>Тюлин Олег</h2>
+                      <p>Back-End Developer</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item" style="background-image: url({% static 'image/command_slide-4.jpg' %});">
+                    <div class="container">
+                      <h2>Морозов Глеб</h2>
+                      <p>UI/UX Designer</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="row section" id="contact">
+    <div class="bigtext text-center">
+      <h1 class="text-center">Свяжитесь с нами</h1>
+      <p>Свяжитесь с нами по email <a href="mailto:lnya.razuvayev@mail.ru">lnya.razuvayev@mail.ru</a> или по телефону 123-456-7890.</p>
+      <br>
+      <p>Найдите нас также на платформах:</p>
+      <p><a href="#">Behance</a> • <a href="#">Flickr</a> • <a href="#">LinkedIn</a></p>
+    </div>
+  </div>
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математический Тренажер</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let score = {{ score|default:0 }};
+            let level = {{ level|default:1 }};
+            let correctCount = {{ correct_count|default:0 }};
+            let incorrectCount = {{ incorrect_count|default:0 }};
+            const equationCount = 10;
+
+            function loadNextEquation(userAnswer) {
+                $.ajax({
+                    url: "{% url 'main:play_game' %}",
+                    method: "POST",
+                    data: {
+                        'user_answer': userAnswer,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        if (response.equation) {
+                            document.getElementById('problem').textContent = response.equation;
+                            document.getElementById('userAnswer').value = '';
+                            document.getElementById('score').textContent = response.score;
+                            document.getElementById('level').textContent = response.level;
+                            score = response.score;
+                            level = response.level;
+                            correctCount = response.correct_count;
+                            incorrectCount = response.incorrect_count;
+                        } else {
+                            showResultsModal();
+                        }
+                    },
+                    error: function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            }
+
+            function showResultsModal() {
+                document.getElementById('correctAnswers').textContent = correctCount;
+                document.getElementById('incorrectAnswers').textContent = incorrectCount;
+                document.getElementById('finalScore').textContent = score;
+                $('#resultModal').modal('show');
+            }
+
+            function finishGame() {
+                showResultsModal();
+                document.getElementById('answerButton').disabled = true;
+                document.getElementById('skipButton').disabled = true;
+                document.getElementById('finishButton').disabled = true;
+            }
+
+            document.getElementById('answerButton').addEventListener('click', function() {
+                const userAnswer = document.getElementById('userAnswer').value;
+                loadNextEquation(userAnswer);
+            });
+
+            document.getElementById('skipButton').addEventListener('click', function() {
+                loadNextEquation(null);
+            });
+
+            document.getElementById('finishButton').addEventListener('click', function() {
+                finishGame();
+            });
+        });
+    </script>
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100" style="background: linear-gradient(120deg, #816eaf 0%, #322249 100%);">
+
+<div class="card shadow-lg" style="background-color: #e2d8c3; border-radius: 15px; overflow: hidden; width: 90%; max-width: 800px; margin: auto;">
+    <div class="card-body" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 40px;">
+        <div class="progress mb-4" style="height: 20px; border-radius: 10px;">
+            <div class="progress-bar bg-success" id="timeBar" style="width: 100%; border-radius: 10px;"></div>
+        </div>
+        <div class="row mb-4 text-center">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <h5>Очки: <span id="score">{{ score }}</span></h5>
+            </div>
+            <div class="col-md-6">
+                <h5>Уровень: <span id="level">{{ level }}</span></h5>
+            </div>
+        </div>
+        <div class="exercise text-center mb-5">
+            <div class="problem display-4 font-weight-bold" id="problem" style="font-size: 3.5rem; font-weight: 700; color: #333; margin: 80px 0;">{{ equation }}</div>
+        </div>
+        <div class="answer text-center">
+            <form id="answerForm">
+                <input type="text" class="form-control d-inline-block mb-3" name="user_answer" id="userAnswer" placeholder="Введите ответ" style="border: 2px solid #ddd; border-radius: 25px; padding: 10px 20px; font-size: 1.5rem; max-width: 100%;">
+                <div>
+                    <button type="button" class="btn btn-success" id="answerButton" style="background-color: #28a745; border-color: #28a745;">Ответить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resultModalLabel">Тренажер завершен!</h5>
+            </div>
+            <div class="modal-body">
+                <h4>Результаты:</h4>
+                <p>Правильные ответы: <span id="correctAnswers">0</span></p>
+                <p>Неправильные ответы: <span id="incorrectAnswers">0</span></p>
+                <p>Очки: <span id="finalScore">0</span></p>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'main:select_difficulty' %}" type="button" class="btn btn-secondary" data-dismiss="modal">Пройти еще раз</a>
+                <a href="{% url 'main:trainersN' %}" type="button" class="btn btn-secondary" data-dismiss="modal">К тренажерам</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/jquery-min.js' %}"></script>
+</body>
+</html>
+
+
+
+
+
+
+

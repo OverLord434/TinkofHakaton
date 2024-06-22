@@ -1,0 +1,299 @@
+.row.section {
+    padding: 5%;
+    margin: 0;
+}
+
+.navbar {
+    box-shadow: 0px 4px 8px rgba(17,17,17,0.2);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+#home {
+    padding: 20%;
+    background-image: url("../image/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.bigtext {
+    text-align: center;
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: white;
+    text-shadow: 0 2px 8px rgba(17,17,17,0.6);
+}
+
+#contact {
+    background-image: radial-gradient(#361247, #2f155f);
+}
+
+.nav-item{
+	font-size: 18px;
+}
+
+.carousel-item{
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	max-width: 100%;
+	height: 850px;
+}
+
+#carousel {
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+.home .carousel-item{
+	max-height: 600px;
+	background-position: center;
+	background-size: cover;
+	position: relative;
+	z-index: 1;
+}
+.home .carousel-item:before{
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	z-index: -1;
+}
+.home .carousel-item .container{
+	position: absolute;
+	left: 50%;
+	top:50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	border-radius: 50px;
+}
+.home .carousel-item h2{
+	font-family: 'Kaushan Script', cursive;
+	font-size: 60px;
+	color: #fff;
+	margin: 0 0 10px;
+	opacity: 0;
+}
+.home .carousel-item p{
+	font-family: "poppins", sans-serif;
+	font-size: 18px;
+	margin: 0;
+	color: #eee;
+	opacity: 0;
+	text-transform: uppercase;
+}
+.home .carousel-item.active h2{
+	animation: fadeInLeft 0.5s ease forwards;
+}
+.home .carousel-item.active p{
+	animation: fadeInRight 0.5s ease forwards;
+}
+
+.home .carousel-controls{
+	position: absolute;
+	left: 50%;
+	bottom: 40px;
+	z-index: 10;
+	transform: translate(-50%);
+}
+.home .carousel-indicators{
+	position: relative;
+	margin: 0;
+}
+.home .carousel-indicators li{
+	width: 70px;
+	height: 70px;
+	margin: 0 5px;
+	border-radius: 50%;
+	background-position: center;
+	background-size: cover;
+	border: 3px solid transparent;
+	transition: all 0.3s ease;
+}
+.home .carousel-control-next img,
+.home .carousel-control-prev img{
+	width: 30px;
+}
+.home .carousel-control-next{
+	right: -90px;
+}
+.home .carousel-control-prev{
+	left: -90px;
+}
+.home .carousel-indicators li.active{
+	border-color:#fff;
+	transform: scale(1.2);
+}
+.home .carousel-control-next,
+.home .carousel-control-prev{
+	width: 60px;
+	height: 60px;
+	opacity: 1;
+	z-index: 3;
+	top: 50%;
+	transform: translateY(-50%);
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+.home .carousel-control-next:hover,
+.home .carousel-control-prev:hover{
+	box-shadow: 0 0 10px #fff;
+}
+
+@keyframes fadeInLeft{
+	0%{
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+	100%{
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+@keyframes fadeInRight{
+	0%{
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	100%{
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+
+@media(max-width: 767px){
+	.home .carousel-control-next,
+	.home .carousel-control-prev{
+		display: none;
+	}	
+	.home .carousel-indicators li{
+		width: 60px;
+		height: 60px;
+	}
+	.home .carousel-item h2{
+		font-size: 45px;
+	}
+	.home .carousel-item p{
+		font-size: 22px;
+	}
+}
+
+ul li::marker, ol li::marker {
+    content: none;
+}
+
+
+/*Стили для страницы с тренажерами*/
+
+/* Стили для выпадающего списка */
+.dropdown-container {
+    display: none;
+    padding-left: 15px;
+}
+
+.dropdown-container.show {
+    display: block;
+}
+        
+@media (max-width: 992px) {
+    .dropdown-container {
+    	display: none;
+    }
+    .dropdown-container.show {
+        display: block;
+    }
+}
+
+/* Стили для боковой панели */
+.sidebar {
+    background-color: rgb(56, 0, 94);
+    color: white;
+    height: 100vh;
+    padding: 10px;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-btn {
+    cursor: pointer;
+}
+
+
+/*Стили для страницы профиля*/
+
+.card {
+	border-radius: 20px;
+	box-shadow: 0px 0px 20px rgba(31, 31, 31, 0.5); 
+	background-color: rgba(255, 255, 255, 0.9); 
+}
+
+.profile-img {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	margin: 20px auto;
+	overflow: hidden;
+	border: 5px solid #fff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img img {
+	width: 100%;
+	height: auto;
+}
+
+.breadcrumb {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button .btn {
+	background-color: #007bff;
+	color: #fff;
+	border-radius: 20px;
+	padding: 8px 20px;
+	transition: background-color 0.3s ease;
+}
+
+.edit-button .btn:hover {
+	background-color: #0056b3;
+}
+
+.info-title {
+	font-weight: bold;
+}
+
+.account-info {
+	padding: 20px;
+	border-radius: 20px;
+	box-shadow: 0px 0px 20px rgba(31, 31, 31, 0.5);
+	background-color: rgba(255, 255, 255, 0.9); 
+	margin-top: 20px;
+}
+
+/*Стили для полей ввода страницы регистрации и авторизации*/ 
+
+.form-control {
+	border: 2px solid #649edb;
+	border-radius: 10px;
+}
+
+.form-group label{
+	font-weight: bold;
+}

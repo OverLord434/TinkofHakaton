@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажеры (Неравенство)</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body style="background-color: rgba(255, 255, 255, 0.767);">
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-dark d-lg-none w-100" style="background-color: rgb(56, 0, 94);">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Ваше Имя</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{% url 'users:home' %}">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{% url 'users:profile' %}">Мой профиль</a>
+                            </li>
+                            <li class="nav-item">
+                                <span class="nav-link dropdown-btn text-light">Тренажеры <span style="font-size: 12px;">▼</span></span>
+                                <div class="dropdown-container">
+                                    <a class="nav-link" href="{% url 'main:trainersN' %}">Числовой пример</a>
+                                    <a class="nav-link" href="{% url 'main:trainersE' %}">Уравнение</a>
+                                    <a class="nav-link" href="{% url 'main:trainersU' %}">Неравенство</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-none d-lg-block sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <img src="https://via.placeholder.com/100" class="rounded-circle" alt="Профиль">
+                        <h4 class="text-light mt-2">{{user.username}}</h4>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active text-light" aria-current="page" href="{% url 'users:home' %}">
+                                Главная
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-light" aria-current="page" href="{% url 'users:profile' %}">
+                                Мой профиль
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link dropdown-btn text-light">Тренажеры <span style="font-size: 12px;">▼</span></span>
+                            <div class="dropdown-container">
+                                <a class="nav-link text-light" href="{% url 'main:trainersN' %}">Числовой пример</a>
+                                <a class="nav-link text-light" href="{% url 'main:trainersE' %}">Уравнение</a>
+                                <a class="nav-link text-light" href="{% url 'main:trainersU' %}">Неравенство</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Тренажеры (Неравенство)</h1>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                      <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Тренажер 1">
+                      <div class="card-body">
+                        <h5 class="card-title">Тренажер 1</h5>
+                        <p class="card-text">Сложность: Легкая</p>
+                        <p class="card-text">Описание тренажера. Этот тренажер помогает улучшить базовые математические навыки.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <a type="button" class="btn btn-sm btn-outline-primary" href="card_trainer_unequal1.html">Начать</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                      <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Тренажер 1">
+                      <div class="card-body">
+                        <h5 class="card-title">Тренажер 2</h5>
+                        <p class="card-text">Сложность: Средняя</p>
+                        <p class="card-text">Описание тренажера. Этот тренажер помогает улучшить базовые математические навыки.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <a type="button" class="btn btn-sm btn-outline-primary" href="card_trainer_unequal2.html">Начать</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                      <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Тренажер 1">
+                      <div class="card-body">
+                        <h5 class="card-title">Тренажер 3</h5>
+                        <p class="card-text">Сложность: Высокая</p>
+                        <p class="card-text">Описание тренажера. Этот тренажер помогает улучшить базовые математические навыки.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <a type="button" class="btn btn-sm btn-outline-primary" href="card_trainer_unequal3.html">Начать</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
